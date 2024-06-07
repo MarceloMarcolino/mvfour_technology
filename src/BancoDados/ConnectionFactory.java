@@ -12,8 +12,8 @@ import java.sql.DriverManager;
  */
 public class ConnectionFactory {
     String host = "localhost";
-    String port = "5432";
-    String user = "postgres";
+    String port = "3306";
+    String user = "mvfour";
     String password = "123456";
     String database = "mvfour_technology";
     
@@ -24,7 +24,7 @@ public class ConnectionFactory {
         //jdbc:postgresql://host:port/database
         //java10+
         var stringConexao = String.format(
-            "jdbc:postgresql://%s:%s/%s",
+            "jdbc:mysql://%s:%s/%s",
             host, port, database
         );
         return DriverManager.getConnection(
