@@ -14,7 +14,7 @@ public class ConnectionFactory {
     String host = "db-mv4-technology-mvfour-technology.f.aivencloud.com";
     String port = "19841";
     String user = "avnadmin";
-    String password = "";
+
     String database = "defaultdb";
     
     //4 partes: tipo de retorno, nome, lista de parâmetros e corpo
