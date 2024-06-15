@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class EventoDAO {
 
-    List<Evento> listar() throws Exception {
+    public List<Evento> listar() throws Exception {
         //construir uma lista
         var eventos = new ArrayList<Evento>();
         //1. Especificar o comando SQL
@@ -45,6 +45,41 @@ public class EventoDAO {
             return eventos;
         }
     }
+        public boolean existe(Evento e) throws Exception {
+        var sql = "SELECT * FROM tb_evento_mvfour nome WHERE nome = ? AND  descricao = ?";
+        var conexao = new ConnectionFactory().conectar();
+        var ps = conexao.prepareStatement(sql);
+        ps.setString(1, e.getNome());
+        ps.setString(2, e.getDescricao());
+        var rs = ps.executeQuery();
+        var eventoExiste = rs.next();
+        
+
+        rs.close();
+        conexao.close();
+        ps.close();
+
+        return eventoExiste;
+    }
+    
+    public void create(Evento e) throws Exception{
+    
+        var sql = "INSERT INTO tb_evento_mvfour (nome, descricao, data_inicio, data_fim) VALUES (?, ?, ?, ?)";
+        var conexao = new ConnectionFactory().conectar();
+        var ps = conexao.prepareStatement(sql);
+            
+            ps.setString(1, e.getNome());
+            ps.setString(2, e.getDescricao());    
+            ps.setString(3, e.convertDataInicio());
+            ps.setString(4, e.convertDataFim());
+            
+            ps.execute();
+        //6. Fechar a conexão
+            conexao.close();
+         
+               
+    }
+    
     public static void main(String[] args) throws Exception{
         var eventoDAO = new EventoDAO();
         var eventos = eventoDAO.listar();

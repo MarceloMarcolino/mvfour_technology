@@ -18,6 +18,17 @@ public class Evento {
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
+    
+    public Evento(String nome, String descricao, Date dataInicio, Date dataFim){
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+    }
+    
+    public Evento(){
+        
+    }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -59,6 +70,18 @@ public class Evento {
         return dataFim;
     }
     
+    public String convertDataInicio() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = dateFormat.format(getDataInicio());
+        return dateString;
+    }
+    
+    public String convertDataFim() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = dateFormat.format(getDataFim());
+        return dateString;
+    }
+    
     
     
     @Override //Annotation: Java 5+
@@ -68,6 +91,10 @@ public class Evento {
             "Nome: %s, Descrição: %s, Data Início: %s",
             nome, descricao, sdf.format(dataInicio)
         );
+    }
+    
+    void add(Evento evento) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

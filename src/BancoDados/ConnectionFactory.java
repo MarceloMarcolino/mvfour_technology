@@ -11,11 +11,11 @@ import java.sql.DriverManager;
  * @author Marcelinho
  */
 public class ConnectionFactory {
-    String host = "localhost";
-    String port = "3306";
-    String user = "mvfour";
-    String password = "123456";
-    String database = "mvfour_technology";
+    String host = "db-mv4-technology-mvfour-technology.f.aivencloud.com";
+    String port = "19841";
+    String user = "avnadmin";
+    String password = "AVNS_gHVWhpUFcyThi1UIyGg";
+    String database = "defaultdb";
     
     //4 partes: tipo de retorno, nome, lista de parâmetros e corpo
     Connection conectar() throws Exception{
