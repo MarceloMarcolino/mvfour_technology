@@ -1,6 +1,7 @@
 package Telas;
 
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import Modelos.User;
 import BancoDados.UserDAO;
 
@@ -15,7 +16,42 @@ public class LoginTela extends javax.swing.JFrame {
      */
     public LoginTela() {
         initComponents();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Icon/logo_square.png")).getImage());
         setLocationRelativeTo(null);
+        
+    }
+    
+    public static void main(String args[]){
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginTela().setVisible(true);
+            }
+        });
+    
     }
 
     /**
@@ -269,7 +305,34 @@ public class LoginTela extends javax.swing.JFrame {
             String senha = new String(senhaPasswordField.getPassword());
             var user = new User(usuario, senha);
             var dao = new UserDAO();
-
+            if(dao.ha(user)){
+                if(user.getTipo()== 1){
+                    JOptionPane.showMessageDialog(null, "Bem vindo " + usuario + "!");
+                    AdminTela at = new AdminTela();
+                    at.setVisible(true);
+                    at.pack();
+                    at.setLocationRelativeTo(null);
+                    at.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Bem vindo " + usuario + "!");
+                    ComumTela ct = new ComumTela();
+                    ct.setVisible(true);
+                    ct.pack();
+                    ct.setLocationRelativeTo(null);
+                    ct.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválido");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Tente novamente mais tarde");
+        }
+            /*
             if (usuario.equals("")){
                 JOptionPane.showMessageDialog(null, "Por favor, insira o nome do usuário.");
             }
@@ -283,7 +346,8 @@ public class LoginTela extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválido!","Aviso",JOptionPane.ERROR_MESSAGE);
 
             }
-            
+            */
+/*
             if(dao.existe(user) != null){
                 JOptionPane.showMessageDialog(null, "Bem vindo");
                 if(user.getTipo() == 1){
@@ -303,11 +367,7 @@ public class LoginTela extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Par usuário/senha inválido");
             }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Tente novamente mais tarde");
-        }
+    */
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
@@ -315,9 +375,18 @@ public class LoginTela extends javax.swing.JFrame {
         CadastroFrame.setVisible(true);
         CadastroFrame.pack();
         CadastroFrame.setLocationRelativeTo(null);
+        CadastroFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_cadastrarButtonActionPerformed
 
+    private void cadastrarButtonMouseClicked(java.awt.event.ActionEvent evt){                                                
+        CadastroTela CadastroFrame = new CadastroTela();
+        CadastroFrame.setVisible(true);
+        CadastroFrame.pack();
+        CadastroFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }
+    
     private void senhaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaCheckBoxActionPerformed
         if (senhaCheckBox.isSelected()){
             senhaPasswordField.setEchoChar((char)0);
